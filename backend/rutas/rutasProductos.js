@@ -6,8 +6,7 @@ const {
   obtenerProducto,
   crearProducto,
   actualizarProducto,
-  eliminarProducto,
-  ajustarStock,
+  eliminarProducto
 } = require('../controladores/controladorProductos');
 
 const { proteger } = require('../middleware/authMiddleware');
@@ -18,6 +17,5 @@ router.get('/:id', obtenerProducto);
 router.post('/', proteger, crearProducto);
 router.put('/:id', proteger, actualizarProducto);
 router.delete('/:id', proteger, eliminarProducto);
-router.patch('/:id/stock', proteger, ajustarStock);
 
 module.exports = router;
