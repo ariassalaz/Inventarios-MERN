@@ -1,4 +1,3 @@
-// modelos/ModeloProducto.js
 const mongoose = require('mongoose');
 
 const esquemaTalla = mongoose.Schema(

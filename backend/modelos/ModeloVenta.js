@@ -1,4 +1,3 @@
-// modelos/ModeloVenta.js
 const mongoose = require('mongoose');
 
 const esquemaItemVenta = mongoose.Schema(
