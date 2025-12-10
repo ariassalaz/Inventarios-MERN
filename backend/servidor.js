@@ -12,9 +12,10 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use('/api/usuarios', require('./rutas/rutasUsuarios'));     // registro / login
-app.use('/api/productos', require('./rutas/rutasProductos'));   // catálogo + inventario
-app.use('/api/ventas', require('./rutas/rutasVentas'));         // compras / órdenes
+app.use('/api/usuarios', require('./rutas/rutasUsuarios'));    
+app.use('/api/productos', require('./rutas/rutasProductos'));   
+app.use('/api/ventas', require('./rutas/rutasVentas'));         
+app.use('/api/reportes', require('./rutas/rutasReportes'));
 
 app.get('/health', (req, res) => {
   res.status(200).json({

@@ -578,9 +578,224 @@ const productos = [
     ]
   },
 
-  //----------------------------------------------------------
+  //-----------------------------MUJER CAMISAS----------------------------
+  {
+    nombre: "Camisa MAJA Outdoor Signature",
+    categoria: "Mujer",
+    precio: 1499,
+    descripcion:
+      "La Camisa MAJA® Outdoor Signature combina protección solar, ventilación estratégica y repelencia al agua en una prenda ligera y resistente. Su tela antidesgarro con estiramiento en 4 vías garantiza libertad de movimiento, mientras que el forro interno de malla mejora la transpirabilidad durante largas jornadas.",
+    imagenes: [
+      "https://majasportswear.com/cdn/shop/files/D-CO1-3-camisa-manga-larga-outdoor-signature-maja-sportswear-01.jpg?v=1764907059&width=700",
+      "https://majasportswear.com/cdn/shop/files/D-CO1-3-camisa-manga-larga-outdoor-signature-maja-sportswear-02.jpg?v=1764907059&width=700",
+      "https://majasportswear.com/cdn/shop/files/D-CO1-3-camisa-manga-larga-outdoor-signature-maja-sportswear-03.jpg?v=1764907059&width=700",
+      "https://majasportswear.com/cdn/shop/files/D-CO1-3-camisa-manga-larga-outdoor-signature-maja-sportswear-04.jpg?v=1764907059&width=700"
+    ],
+    
+    tallas: [
+      { talla: "XXS", stock: 10},
+      { talla: "XS", stock: 10},  
+      { talla: "S", stock: 10 },
+      { talla: "M", stock: 18 },
+      { talla: "L", stock: 15 },
+      { talla: "XL", stock: 15 },
+      { talla: "XXL", stock: 15 }
+    ]
+  },
+    {
+    nombre: "Camisa MAJA Oxford",
+    categoria: "Mujer",
+    precio: 1099,
+    descripcion:
+      "Nuestra camisa MAJA Oxford proporciona un aspecto clásico y versátil para el uso diario. Ajustamos cada detalle para garantizar la calidad, el ajuste y la comodidad.",
+    imagenes: [
+      "https://majasportswear.com/cdn/shop/files/D-CO4-1-camisa-manga-larga-tipo-oxford-blanca-maja-sportswear-01.jpg?v=1758824811&width=700",
+      "https://majasportswear.com/cdn/shop/files/D-CO4-1-camisa-manga-larga-tipo-oxford-blanca-maja-sportswear-02.jpg?v=1758824811&width=700",
+      "https://majasportswear.com/cdn/shop/files/D-CO4-1-camisa-manga-larga-tipo-oxford-blanca-maja-sportswear-03.jpg?v=1758824811&width=700",
+      "https://majasportswear.com/cdn/shop/files/D-CO4-1-camisa-manga-larga-tipo-oxford-blanca-maja-sportswear-04.jpg?v=1758824811&width=700"
+    ],
+    
+    tallas: [
+      { talla: "XXS", stock: 10},
+      { talla: "XS", stock: 10},  
+      { talla: "S", stock: 10 },
+      { talla: "M", stock: 18 },
+      { talla: "L", stock: 15 },
+      { talla: "XL", stock: 15 },
+      { talla: "XXL", stock: 15 }
+    ]
+
+  },
+    {
+    nombre: "Camisa Pescadero",
+    categoria: "Mujer",
+    precio: 1499,
+    descripcion:
+      "La Camisa Pescadero es ligera, ventilada y funcional. Ideal para pesca, caminatas, trabajo al sol o cualquier jornada larga. Su corte relajado y tela microperforada te mantienen fresca y en movimiento todo el día.",
+    imagenes: [
+      "https://majasportswear.com/cdn/shop/files/D-CO5-2-camisa-manga-larga-pescadero-verde-menta-maja-sportswear-01.jpg?v=1764907324&width=700",
+      "https://majasportswear.com/cdn/shop/files/D-CO5-2-camisa-manga-larga-pescadero-verde-menta-maja-sportswear-01.jpg?v=1764907324&width=700",
+      "https://majasportswear.com/cdn/shop/files/D-CO5-2-camisa-manga-larga-pescadero-verde-menta-maja-sportswear-01.jpg?v=1764907324&width=700",
+      "https://majasportswear.com/cdn/shop/files/D-CO5-2-camisa-manga-larga-pescadero-verde-menta-maja-sportswear-01.jpg?v=1764907324&width=700"
+    ],
+    
+    tallas: [
+      { talla: "XXS", stock: 10},
+      { talla: "XS", stock: 10},  
+      { talla: "S", stock: 10 },
+      { talla: "M", stock: 18 },
+      { talla: "L", stock: 15 },
+      { talla: "XL", stock: 15 },
+      { talla: "XXL", stock: 15 }
+    ]
+  },
+//----------------------PLAYERA MUJER -------------------------------------
+    {
+    nombre: "Playera MAJA Estrella",
+    categoria: "Mujer",
+    precio: 499,
+    descripcion:
+      "La playera Maja Estrella combina protección solar, ventilación estratégica y repelencia al agua en una prenda ligera y resistente.",
+    imagenes: [
+      "https://majasportswear.com/cdn/shop/files/D-PD1-2-playera-maja-estrella-verde-lima-maja-sportswear-01.jpg?v=1764907864&width=700",
+      "https://majasportswear.com/cdn/shop/files/D-PD1-2-playera-maja-estrella-verde-lima-maja-sportswear-02.jpg?v=1764907864&width=700",
+      "https://majasportswear.com/cdn/shop/files/D-PD1-2-playera-maja-estrella-verde-lima-maja-sportswear-03.jpg?v=1764907864&width=700",
+      "https://majasportswear.com/cdn/shop/files/D-PD1-2-playera-maja-estrella-verde-lima-maja-sportswear-04.jpg?v=1764907864&width=700"
+    ],
+    
+    tallas: [
+      { talla: "XXS", stock: 10},
+      { talla: "XS", stock: 10},  
+      { talla: "S", stock: 10 },
+      { talla: "M", stock: 18 },
+      { talla: "L", stock: 15 },
+      { talla: "XL", stock: 15 },
+      { talla: "XXL", stock: 15 }
+    ]
+  },
+  //--------------------SUDADERA MUJER ------------------------
+    {
+    nombre: "Sudadera MAJA Calma",
+    categoria: "Mujer",
+    precio: 1399,
+    descripcion:
+      "La Sudadera MAJA Calma equilibra funcionalidad, estilo y confort en una silueta moderna tipo crop. Diseñada para acompañarte en entrenamientos, días casuales o actividades al aire libre, combina una tela híper suave, conservación térmica y tejido elástico en 4 vías para brindar libertad total de movimiento.",
+    imagenes: [
+      "https://majasportswear.com/cdn/shop/files/D-CF4-1-sudadera-maja-calma-color-gris-oscuro-maja-sportswear-01.jpg?v=1761626717&width=700",
+      "https://majasportswear.com/cdn/shop/files/D-CF4-1-sudadera-maja-calma-color-gris-oscuro-maja-sportswear-02.jpg?v=1761626717&width=700",
+      "https://majasportswear.com/cdn/shop/files/D-CF4-1-sudadera-maja-calma-color-gris-oscuro-maja-sportswear-03.jpg?v=1761626717&width=700",
+      "https://majasportswear.com/cdn/shop/files/D-CF4-1-sudadera-maja-calma-color-gris-oscuro-maja-sportswear-04.jpg?v=1761626717&width=700"
+    ],
+    
+    tallas: [
+      { talla: "XXS", stock: 10},
+      { talla: "XS", stock: 10},  
+      { talla: "S", stock: 10 },
+      { talla: "M", stock: 18 },
+      { talla: "L", stock: 15 },
+      { talla: "XL", stock: 15 },
+      { talla: "XXL", stock: 15 }
+    ]
+  },
+
+    {
+    nombre: "Hoodie MAJA Polar",
+    categoria: "Mujer",
+    precio: 1199,
+    descripcion:
+      "La Hoodie MAJA Polar redefine el confort con un diseño minimalista, térmico y funcional. Su silueta boxy combina un estilo urbano relajado con la practicidad de una prenda técnica. Confeccionada en mezcla de algodón y poliéster, mantiene la temperatura corporal sin perder transpirabilidad.",
+    imagenes: [
+      "https://majasportswear.com/cdn/shop/files/D-HO1-4-hoodie-maja-polar-color-cafe-maja-sportswear-01.jpg?v=1761626922&width=700",
+      "https://majasportswear.com/cdn/shop/files/D-HO1-4-hoodie-maja-polar-color-cafe-maja-sportswear-02.jpg?v=1761626922&width=700",
+      "https://majasportswear.com/cdn/shop/files/D-HO1-4-hoodie-maja-polar-color-cafe-maja-sportswear-03.jpg?v=1761626922&width=700",
+      "https://majasportswear.com/cdn/shop/files/D-HO1-4-hoodie-maja-polar-color-cafe-maja-sportswear-04.jpg?v=1761626922&width=700"
+    ],
+    
+    tallas: [
+      { talla: "XXS", stock: 10},
+      { talla: "XS", stock: 10},  
+      { talla: "S", stock: 10 },
+      { talla: "M", stock: 18 },
+      { talla: "L", stock: 15 },
+      { talla: "XL", stock: 15 },
+      { talla: "XXL", stock: 15 }
+    ]
+  },
+    {
+    nombre: "Hoodie Emblema MAJA",
+    categoria: "Mujer",
+    precio: 1199,
+    descripcion:
+      "Diseñada para acompañarte en movimiento, la Hoodie Emblema MAJA combina estilo, comodidad y funcionalidad en una sola prenda. Su corte entallado y sus detalles técnicos la hacen ideal para entrenar, recorrer la ciudad o enfrentar cambios de clima sin perder ritmo.",
+    imagenes: [
+      "https://majasportswear.com/cdn/shop/files/D-CH1-1-hoodie-emblema-maja-blanco-maja-sportswear-01.jpg?v=1753913413&width=700",
+      "https://majasportswear.com/cdn/shop/files/D-CH1-1-hoodie-emblema-maja-blanco-maja-sportswear-02.jpg?v=1753913413&width=700",
+      "https://majasportswear.com/cdn/shop/files/D-CH1-1-hoodie-emblema-maja-blanco-maja-sportswear-03.jpg?v=1753913413&width=700",
+      "https://majasportswear.com/cdn/shop/files/D-CH1-1-hoodie-emblema-maja-blanco-maja-sportswear-04.jpg?v=1753913413&width=700"
+    ],
+    
+    tallas: [
+      { talla: "XXS", stock: 10},
+      { talla: "XS", stock: 10},  
+      { talla: "S", stock: 10 },
+      { talla: "M", stock: 18 },
+      { talla: "L", stock: 15 },
+      { talla: "XL", stock: 15 },
+      { talla: "XXL", stock: 15 }
+    ]
+  },
+
+  //-----------------------CHALECO MUJER -----------------------------
+    {
+    nombre: "Chaleco Polar MAJA",
+    categoria: "Mujer",
+    precio: 1199,
+    descripcion:
+      "El Chaleco MAJA Polar combina ligereza, funcionalidad y estilo moderno en una prenda pensada para acompañarte en todo momento. Confeccionado en tejido resistente y suave al tacto, este chaleco es ideal como capa exterior ligera para actividades al aire libre o como complemento casual.",
+    imagenes: [
+      "https://majasportswear.com/cdn/shop/files/D-CF2-4-chaleco-maja-polar-color-cafe-maja-sportswear-01.jpg?v=1764767929&width=700",
+      "https://majasportswear.com/cdn/shop/files/D-CF2-4-chaleco-maja-polar-color-cafe-maja-sportswear-02.jpg?v=1764767929&width=700",
+      "https://majasportswear.com/cdn/shop/files/D-CF2-4-chaleco-maja-polar-color-cafe-maja-sportswear-03.jpg?v=1764767929&width=700",
+      "https://majasportswear.com/cdn/shop/files/D-CF2-4-chaleco-maja-polar-color-cafe-maja-sportswear-04.jpg?v=1764767929&width=700"
+    ],
+    
+    tallas: [
+      { talla: "XXS", stock: 10},
+      { talla: "XS", stock: 10},  
+      { talla: "S", stock: 10 },
+      { talla: "M", stock: 18 },
+      { talla: "L", stock: 15 },
+      { talla: "XL", stock: 15 },
+      { talla: "XXL", stock: 15 }
+    ]
+  },
+
+  {
+    nombre: "Chaleco MAJA Pedregal Dama",
+    categoria: "Mujer",
+    precio: 1399,
+    descripcion:
+      "El Chaleco MAJA Pedregal Dama combina abrigo, ligereza y estilo urbano en una prenda diseñada para los días fríos o de clima variable. Su silueta ligera y cómoda permite moverte con libertad, mientras que la tecnología de conservación térmica y repelencia al agua mantiene el confort en cualquier entorno.",
+    imagenes: [
+      "https://majasportswear.com/cdn/shop/files/D-CF3-2-chaleco-maja-pedregal-dama-color-verde-bahia-maja-sportswear-01.jpg?v=1762526160&width=700",
+      "https://majasportswear.com/cdn/shop/files/D-CF3-2-chaleco-maja-pedregal-dama-color-verde-bahia-maja-sportswear-02.jpg?v=1762526160&width=700",
+      "https://majasportswear.com/cdn/shop/files/D-CF3-2-chaleco-maja-pedregal-dama-color-verde-bahia-maja-sportswear-03.jpg?v=1762526160&width=700",
+      "https://majasportswear.com/cdn/shop/files/D-CF3-2-chaleco-maja-pedregal-dama-color-verde-bahia-maja-sportswear-04.jpg?v=1762526160&width=700"
+    ],
+    
+    tallas: [
+      { talla: "XXS", stock: 10},
+      { talla: "XS", stock: 10},  
+      { talla: "S", stock: 10 },
+      { talla: "M", stock: 18 },
+      { talla: "L", stock: 15 },
+      { talla: "XL", stock: 15 },
+      { talla: "XXL", stock: 15 }
+    ]
+  },
   
   
+
 ];
 
 const run = async () => {
