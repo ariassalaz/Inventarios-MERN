@@ -4,15 +4,15 @@ const router = express.Router();
 const {
   crearVenta,
   obtenerVentas,
-  obtenerMisVentas,
+  obtenerVenta,
 } = require('../controladores/controladorVentas');
 
 const { proteger } = require('../middleware/authMiddleware');
 
 router.post('/', proteger, crearVenta);
 
-router.get('/mias', proteger, obtenerMisVentas);
-
 router.get('/', proteger, obtenerVentas);
+
+router.get('/:id', proteger, obtenerVenta);
 
 module.exports = router;

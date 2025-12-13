@@ -27,5 +27,5 @@ app.get('/health', (req, res) => {
 app.use(errorHandler);
 
 app.listen(puerto, () => {
-  console.log(`Servidor Inventarios-MERN escuchando en http://localhost:${puerto}`);
+  console.log(`Servidor escuchando en http://inventarios.rickit19.jcarlos19.com:${puerto}`);
 });
