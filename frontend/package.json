@@ -2,6 +2,9 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
+
+  "proxy": "http://inventarios.rickit19.jcarlos19.com:5000",
+  
   "dependencies": {
     "@reduxjs/toolkit": "^2.11.1",
     "@testing-library/dom": "^10.4.1",

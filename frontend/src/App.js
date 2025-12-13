@@ -1,82 +1,53 @@
-import React from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
-import Navbar from './components/Navbar';
-import ProtectedRoute from './components/ProtectedRoute';
+import React, { useEffect } from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
-import Login from './pages/Login';
-import Dashboard from './pages/Dashboard';
-import Productos from './pages/Productos';
-import ProductoForm from './pages/ProductoForm';
-import Ventas from './pages/Ventas';
-import Reportes from './pages/Reportes';
+import NavBar from "./components/NavBar";
+import Footer from "./components/Footer";
+import ProtectedRoute from "./components/ProtectedRoute";
+
+import Home from "./pages/Home";
+import Category from "./pages/Category";
+import Product from "./pages/Product";
+import Login from "./pages/Login";
+import Admin from "./pages/Admin";
+import Cart from "./pages/Cart";
+
+import { loadUserFromStorage } from "./features/auth/authSlice";
 
 export default function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(loadUserFromStorage());
+  }, [dispatch]);
+
   return (
     <div className="app">
-      <Navbar />
+      <NavBar />
 
-      <main className="container">
+      <main className="main">
         <Routes>
-          <Route path="/" element={<Navigate to="/dashboard" replace />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/categoria/:categoria" element={<Category />} />
+          <Route path="/producto/:id" element={<Product />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/carrito" element={<Cart />} />
 
           <Route
-            path="/dashboard"
+            path="/admin"
             element={
-              <ProtectedRoute>
-                <Dashboard />
+              <ProtectedRoute roles={["admin"]}>
+                <Admin />
               </ProtectedRoute>
             }
           />
 
-          <Route
-            path="/productos"
-            element={
-              <ProtectedRoute>
-                <Productos />
-              </ProtectedRoute>
-            }
-          />
-
-          <Route
-            path="/productos/nuevo"
-            element={
-              <ProtectedRoute>
-                <ProductoForm modo="crear" />
-              </ProtectedRoute>
-            }
-          />
-
-          <Route
-            path="/productos/:id/editar"
-            element={
-              <ProtectedRoute>
-                <ProductoForm modo="editar" />
-              </ProtectedRoute>
-            }
-          />
-
-          <Route
-            path="/ventas"
-            element={
-              <ProtectedRoute>
-                <Ventas />
-              </ProtectedRoute>
-            }
-          />
-
-          <Route
-            path="/reportes"
-            element={
-              <ProtectedRoute>
-                <Reportes />
-              </ProtectedRoute>
-            }
-          />
-
-          <Route path="*" element={<div className="card">404</div>} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
+
+      <Footer />
     </div>
   );
 }

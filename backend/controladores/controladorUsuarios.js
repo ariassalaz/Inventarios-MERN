@@ -9,6 +9,14 @@ const generarToken = (id) => {
   });
 };
 
+const mapUsuarioPublico = (usuario) => ({
+  _id: usuario.id,
+  nombre: usuario.nombre,
+  email: usuario.email,
+  rol: usuario.rol,
+  isAdmin: usuario.rol === 'admin',
+});
+
 const registrarUsuario = asyncHandler(async (req, res) => {
   const { nombre, email, password, rol } = req.body;
 
@@ -18,7 +26,6 @@ const registrarUsuario = asyncHandler(async (req, res) => {
   }
 
   const usuarioExiste = await Usuario.findOne({ email });
-
   if (usuarioExiste) {
     res.status(400);
     throw new Error('Ya existe un usuario con ese email');
@@ -35,10 +42,7 @@ const registrarUsuario = asyncHandler(async (req, res) => {
   });
 
   res.status(201).json({
-    _id: usuario.id,
-    nombre: usuario.nombre,
-    email: usuario.email,
-    rol: usuario.rol,
+    ...mapUsuarioPublico(usuario),
     token: generarToken(usuario.id),
   });
 });
@@ -47,24 +51,19 @@ const loginUsuario = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
   const usuario = await Usuario.findOne({ email });
-
   if (!usuario) {
     res.status(400);
     throw new Error('Credenciales inválidas');
   }
 
   const coincidePassword = await bcrypt.compare(password, usuario.password);
-
   if (!coincidePassword) {
     res.status(400);
     throw new Error('Credenciales inválidas');
   }
 
   res.status(200).json({
-    _id: usuario.id,
-    nombre: usuario.nombre,
-    email: usuario.email,
-    rol: usuario.rol,
+    ...mapUsuarioPublico(usuario),
     token: generarToken(usuario.id),
   });
 });
@@ -72,7 +71,12 @@ const loginUsuario = asyncHandler(async (req, res) => {
 const obtenerUsuario = asyncHandler(async (req, res) => {
   const usuario = await Usuario.findById(req.usuario.id).select('-password');
 
-  res.status(200).json(usuario);
+  if (!usuario) {
+    res.status(404);
+    throw new Error('Usuario no encontrado');
+  }
+
+  res.status(200).json(mapUsuarioPublico(usuario));
 });
 
 module.exports = {
