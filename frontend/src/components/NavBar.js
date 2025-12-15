@@ -11,11 +11,13 @@ export default function NavBar() {
   const { user } = useSelector((s) => s.auth);
   const cartItems = useSelector((s) => s.cart?.items || []);
 
+  //CALCULAR TOTAL DE ITEMS EN CARRITO
   const cartCount = useMemo(
     () => cartItems.reduce((acc, it) => acc + (Number(it.cantidad) || 0), 0),
     [cartItems]
   );
 
+  //VERIFICAR SI ES ADMIN
   const isAdmin = useMemo(() => {
     const rol = user?.rol || user?.role;
     return rol === "admin";

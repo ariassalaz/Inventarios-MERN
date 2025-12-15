@@ -5,8 +5,8 @@ import cartReducer from "../features/cart/cartSlice";
 
 export default configureStore({
   reducer: {
-    auth: authReducer,
-    products: productsReducer,
-    cart: cartReducer,
+    auth: authReducer,  //AUTENTICACIÓN
+    products: productsReducer, //LISTA DE PRODUCTOS
+    cart: cartReducer, //CARRITO
   },
 });

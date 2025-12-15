@@ -4,9 +4,9 @@ import { apiFetch } from "../../services/api";
 const LS_KEY = "inventarios_auth";
 
 const initialState = {
-  user: null,
-  token: null,
-  status: "idle",
+  user: null, //DATOS USUARIO
+  token: null, //JWT TOKEN
+  status: "idle", 
   error: null,
 };
 
@@ -31,6 +31,7 @@ export const login = createAsyncThunk("auth/login", async (cred) => {
   return apiFetch("/api/usuarios/login", { method: "POST", body: cred });
 });
 
+//OBTENER DATOS DE USUARIO ACTUAL
 export const fetchMe = createAsyncThunk("auth/me", async (_, { getState }) => {
   const { token } = getState().auth;
   return apiFetch("/api/usuarios/yo", { token });
@@ -40,6 +41,7 @@ const slice = createSlice({
   name: "auth",
   initialState,
   reducers: {
+    //CERRAR SESIÓN
     logout(state) {
       state.user = null;
       state.token = null;

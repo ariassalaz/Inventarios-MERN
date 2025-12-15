@@ -25,15 +25,18 @@ const registrarUsuario = asyncHandler(async (req, res) => {
     throw new Error('Por favor llena todos los campos requeridos');
   }
 
+  //VERIFICAR QUE EL EMAIL NO EXISTE
   const usuarioExiste = await Usuario.findOne({ email });
   if (usuarioExiste) {
     res.status(400);
     throw new Error('Ya existe un usuario con ese email');
   }
 
+  //HASHEAR LA CONTRASEÑA PARA SEGURIDAD
   const salt = await bcrypt.genSalt(10);
   const passwordHash = await bcrypt.hash(password, salt);
 
+  //CREAR USUARIO EN BD
   const usuario = await Usuario.create({
     nombre,
     email,
@@ -41,6 +44,8 @@ const registrarUsuario = asyncHandler(async (req, res) => {
     rol: rol || 'cliente',
   });
 
+
+  //GENERAR JWT TOKEN
   res.status(201).json({
     ...mapUsuarioPublico(usuario),
     token: generarToken(usuario.id),
@@ -50,18 +55,21 @@ const registrarUsuario = asyncHandler(async (req, res) => {
 const loginUsuario = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
+  //BUSCAR USUARIO POR EMAIL
   const usuario = await Usuario.findOne({ email });
   if (!usuario) {
     res.status(400);
     throw new Error('Credenciales inválidas');
   }
 
+  //COMPARAR CONTRASEÑA HASHEADA
   const coincidePassword = await bcrypt.compare(password, usuario.password);
   if (!coincidePassword) {
     res.status(400);
     throw new Error('Credenciales inválidas');
   }
 
+  //RETORNA DATOS DEL USUARIO 
   res.status(200).json({
     ...mapUsuarioPublico(usuario),
     token: generarToken(usuario.id),

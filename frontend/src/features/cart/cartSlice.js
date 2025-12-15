@@ -4,7 +4,7 @@ import { apiFetch } from "../../services/api";
 const LS_KEY = "inventarios_cart";
 
 const initialState = {
-  items: [],
+  items: [], 
   status: "idle",
   error: null,
 };
@@ -47,19 +47,24 @@ const slice = createSlice({
   name: "cart",
   initialState,
   reducers: {
+    //AGREGAR A CARRITO
     addToCart(state, action) {
       const it = action.payload;
       const key = `${it.productoId}-${it.talla}`;
+      //BUSCAR SI EXISTE
       const existing = state.items.find((x) => `${x.productoId}-${x.talla}` === key);
 
       if (existing) {
+        //INCREMENTAR CANTIDAD
         existing.cantidad = Number(existing.cantidad || 0) + Number(it.cantidad || 1);
       } else {
+        //AGREGAR NUEVO PRODUCTO
         state.items.push({ ...it, cantidad: Number(it.cantidad || 1) });
       }
 
       localStorage.setItem(LS_KEY, JSON.stringify(state.items));
     },
+    //QUITAR DE CARRITO
     removeFromCart(state, action) {
       const { productoId, talla } = action.payload;
       state.items = state.items.filter((x) => !(x.productoId === productoId && x.talla === talla));

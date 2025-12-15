@@ -2,6 +2,7 @@ const asyncHandler = require('express-async-handler');
 const Producto = require('../modelos/ModeloProducto');
 
 const obtenerProductos = asyncHandler(async (req, res) => {
+  //RETORNA PRODUCTOS ACTIVOS
   const productos = await Producto.find({ activo: true });
   res.status(200).json(productos);
 });
@@ -25,6 +26,7 @@ const crearProducto = asyncHandler(async (req, res) => {
     throw new Error('Nombre, categoría y precio son obligatorios');
   }
 
+  //CREAR PRODUCTO EN BD
   const producto = await Producto.create({
     nombre,
     categoria,
@@ -63,6 +65,7 @@ const eliminarProducto = asyncHandler(async (req, res) => {
     throw new Error('Producto no encontrado');
   }
 
+  //DESACTIVA PRODUCTO
   producto.activo = false;
   await producto.save();
 

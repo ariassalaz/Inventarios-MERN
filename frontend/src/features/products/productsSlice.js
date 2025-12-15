@@ -8,6 +8,7 @@ const initialState = {
   error: null,
 };
 
+//OBTENER TODOS LOS PRODUCTOS
 export const getProducts = createAsyncThunk(
   "products/getProducts",
   async (_, { rejectWithValue }) => {
@@ -20,6 +21,7 @@ export const getProducts = createAsyncThunk(
   }
 );
 
+//OBTENER PRODUCTOS CON TOKEN
 export const fetchProductsAdmin = createAsyncThunk(
   "products/fetchAdmin",
   async (_, { getState, rejectWithValue }) => {
@@ -34,6 +36,7 @@ export const fetchProductsAdmin = createAsyncThunk(
   }
 );
 
+//OBTENER UN PRODUCTO EN ESPECÍFICO
 export const getProduct = createAsyncThunk(
   "products/getOne",
   async (id, { rejectWithValue }) => {
