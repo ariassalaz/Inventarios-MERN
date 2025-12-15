@@ -1,12 +1,11 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Hero from "../components/Hero";
 import ProductCard from "../components/ProductCard";
 import { getProducts } from "../features/products/productsSlice";
 
 export default function Home() {
   const dispatch = useDispatch();
-  const { items, status, error } = useSelector((s) => s.products);
+  const { items = [], status, error } = useSelector((s) => s.products);
 
   useEffect(() => {
     dispatch(getProducts());
@@ -16,17 +15,15 @@ export default function Home() {
 
   return (
     <>
-      <Hero imageUrl={heroImg} />
-
       <section className="container">
         <div className="sectionTitle">Lo más nuevo</div>
 
         {status === "loading" && <p className="muted">Cargando productos...</p>}
-        {error && <p className="error">{error}</p>}
+        {status === "failed" && <p className="error">{error || "Error"}</p>}
 
         <div className="productsGrid">
           {items.slice(0, 9).map((p) => (
-            <ProductCard key={p._id} p={p} />
+            <ProductCard key={p._id} producto={p} />
           ))}
         </div>
       </section>

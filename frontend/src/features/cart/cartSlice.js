@@ -1,76 +1,101 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { apiFetch } from "../../services/api";
 
-const load = () => {
+const LS_KEY = "inventarios_cart";
+
+const initialState = {
+  items: [],
+  status: "idle",
+  error: null,
+};
+
+export const loadCartFromStorage = createAsyncThunk("cart/load", async () => {
+  const raw = localStorage.getItem(LS_KEY);
+  if (!raw) return [];
   try {
-    const raw = localStorage.getItem("cart");
-    return raw ? JSON.parse(raw) : [];
+    return JSON.parse(raw) || [];
   } catch {
     return [];
   }
-};
+});
 
-const save = (items) => {
-  try {
-    localStorage.setItem("cart", JSON.stringify(items));
-  } catch {}
-};
+export const checkoutCart = createAsyncThunk(
+  "cart/checkout",
+  async (_, { getState, rejectWithValue }) => {
+    const { auth, cart } = getState();
+    const token = auth.token;
 
-const initialState = {
-  items: load(),
-};
+    if (!token) return rejectWithValue("Debes iniciar sesión para comprar");
+    if (!cart.items || cart.items.length === 0) return rejectWithValue("Carrito vacío");
 
-const cartSlice = createSlice({
+    const payload = {
+      items: cart.items.map((it) => ({
+        productoId: it.productoId,
+        talla: it.talla,
+        cantidad: Number(it.cantidad || 0),
+        precio: Number(it.precio || 0),
+        nombre: it.nombre,
+        imagen: it.imagen,
+      })),
+    };
+
+    return apiFetch("/api/ventas", { method: "POST", token, body: payload });
+  }
+);
+
+const slice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    addToCart: (state, action) => {
-      const it = action.payload; // {productoId,nombre,precio,imagen,talla,cantidad,stock}
-      const idx = state.items.findIndex((x) => x.productoId === it.productoId && x.talla === it.talla);
+    addToCart(state, action) {
+      const it = action.payload;
+      const key = `${it.productoId}-${it.talla}`;
+      const existing = state.items.find((x) => `${x.productoId}-${x.talla}` === key);
 
-      if (idx >= 0) {
-        const nueva = Math.min(Number(state.items[idx].stock || it.stock || 0), Number(state.items[idx].cantidad || 0) + Number(it.cantidad || 1));
-        state.items[idx].cantidad = nueva;
-        // actualiza imagen/precio/stock por si cambiaron
-        state.items[idx].precio = it.precio;
-        state.items[idx].imagen = it.imagen;
-        state.items[idx].stock = it.stock;
+      if (existing) {
+        existing.cantidad = Number(existing.cantidad || 0) + Number(it.cantidad || 1);
       } else {
-        state.items.push({
-          productoId: it.productoId,
-          nombre: it.nombre,
-          precio: it.precio,
-          imagen: it.imagen,
-          talla: it.talla,
-          cantidad: Math.max(1, Number(it.cantidad || 1)),
-          stock: Number(it.stock || 0),
-        });
+        state.items.push({ ...it, cantidad: Number(it.cantidad || 1) });
       }
 
-      save(state.items);
+      localStorage.setItem(LS_KEY, JSON.stringify(state.items));
     },
-
-    updateQty: (state, action) => {
-      const { productoId, talla, cantidad } = action.payload;
-      const idx = state.items.findIndex((x) => x.productoId === productoId && x.talla === talla);
-      if (idx >= 0) {
-        const max = Number(state.items[idx].stock || 1);
-        state.items[idx].cantidad = Math.max(1, Math.min(Number(cantidad || 1), max));
-        save(state.items);
-      }
-    },
-
-    removeFromCart: (state, action) => {
+    removeFromCart(state, action) {
       const { productoId, talla } = action.payload;
       state.items = state.items.filter((x) => !(x.productoId === productoId && x.talla === talla));
-      save(state.items);
+      localStorage.setItem(LS_KEY, JSON.stringify(state.items));
     },
-
-    clearCart: (state) => {
+    clearCart(state) {
       state.items = [];
-      save(state.items);
+      localStorage.setItem(LS_KEY, JSON.stringify([]));
     },
+    setQty(state, action) {
+      const { productoId, talla, cantidad } = action.payload;
+      const it = state.items.find((x) => x.productoId === productoId && x.talla === talla);
+      if (it) it.cantidad = Math.max(1, Number(cantidad || 1));
+      localStorage.setItem(LS_KEY, JSON.stringify(state.items));
+    },
+  },
+  extraReducers: (b) => {
+    b.addCase(loadCartFromStorage.fulfilled, (s, a) => {
+      s.items = a.payload || [];
+    });
+
+    b.addCase(checkoutCart.pending, (s) => {
+      s.status = "loading";
+      s.error = null;
+    });
+    b.addCase(checkoutCart.fulfilled, (s) => {
+      s.status = "succeeded";
+      s.items = [];
+      localStorage.setItem(LS_KEY, JSON.stringify([]));
+    });
+    b.addCase(checkoutCart.rejected, (s, a) => {
+      s.status = "failed";
+      s.error = a.payload || a.error.message;
+    });
   },
 });
 
-export const { addToCart, updateQty, removeFromCart, clearCart } = cartSlice.actions;
-export default cartSlice.reducer;
+export const { addToCart, removeFromCart, clearCart, setQty } = slice.actions;
+export default slice.reducer;

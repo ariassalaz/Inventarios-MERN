@@ -28,22 +28,6 @@ export default function Header() {
   return (
     <header className="topbar">
       <div className="container topbarInner">
-        <Link to="/" className="brand">
-          <img
-            src={process.env.PUBLIC_URL + "/logo-maja.png"}
-            alt="MAJA Sportswear"
-            className="brandLogo"
-            style={{ height: 32, width: "auto" }}
-            onError={(e) => {
-              // Si no encuentra el logo, deja texto para que lo notes
-              e.currentTarget.style.display = "none";
-              console.error("No se encontró el logo en /public/logo-maja.png");
-            }}
-          />
-          {/* Si quieres texto junto al logo, descomenta */}
-          {/* <span>MAJA Sportswear</span> */}
-        </Link>
-
         <nav className="nav">
           <NavLink
             to="/"

@@ -64,7 +64,6 @@ export default function Product() {
       })
     );
 
-    alert("Agregado al carrito ✅");
   };
 
   if (status === "loading" || !p) {

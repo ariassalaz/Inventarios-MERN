@@ -33,8 +33,6 @@ export default function NavBar() {
       <div className="container">
         <div className="headerRow">
           <Link to="/" className="brand" aria-label="Inicio">
-            {/* Asegúrate de tener este archivo en: frontend/public/logo-maja.png */}
-            <img src="/logo-maja.png" alt="MAJA Sportswear" className="brandLogo" />
           </Link>
 
           <form className="search" onSubmit={onSearch}>

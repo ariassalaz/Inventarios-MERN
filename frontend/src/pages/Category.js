@@ -9,21 +9,18 @@ function norm(str) {
 }
 
 export default function Category() {
-  const { categoria } = useParams(); // viene de /categoria/:categoria
+  const { categoria } = useParams(); // /categoria/:categoria
   const location = useLocation();
   const dispatch = useDispatch();
 
   const { items = [], status, error } = useSelector((s) => s.products);
 
-  // lee ?q=...
   const q = useMemo(() => {
     const sp = new URLSearchParams(location.search);
     return (sp.get("q") || "").trim();
   }, [location.search]);
 
   useEffect(() => {
-    // Carga todos los productos una vez (tu slice debe tener getProducts)
-    // Si tu getProducts recibe categoria, NO lo uses aquí: cargamos todos y filtramos en frontend.
     dispatch(getProducts());
   }, [dispatch]);
 
@@ -32,12 +29,12 @@ export default function Category() {
   const filtered = useMemo(() => {
     let list = Array.isArray(items) ? items : [];
 
-    // Filtrar por categoría solo si no es "todo/explorar"
+    // categoría
     if (categoriaNorm && !["todo", "explorar"].includes(categoriaNorm)) {
       list = list.filter((p) => norm(p.categoria) === categoriaNorm);
     }
 
-    // Filtrar por búsqueda si existe
+    // búsqueda
     if (q) {
       const qn = norm(q);
       list = list.filter((p) => {
@@ -54,8 +51,7 @@ export default function Category() {
   const titulo = useMemo(() => {
     if (q && ["todo", "explorar"].includes(categoriaNorm)) return `Resultados: "${q}"`;
     if (q) return `${categoria} · "${q}"`;
-    if (!categoria) return "Tienda";
-    return categoria;
+    return categoria || "Tienda";
   }, [categoria, categoriaNorm, q]);
 
   if (status === "loading") {
