@@ -4,6 +4,7 @@ El proyecto simula una tienda de ropa con stock por talla, carrito de compras y 
 
 
 FUNCIONALIDADES PRINCIPALES
+
 CLIENTE
 -Visualización de productos
 -Filtrado por categoría (Hombre / Mujer)
@@ -26,7 +27,9 @@ ADMINISTRADOR
 
 
 TECNOLOGÍAS UTILIZADAS
+
 BACKEND
+
 Node.js
 Express.js
 MongoDB
@@ -35,6 +38,7 @@ bcryptjs
 express-async-handler
 
 FRONTEND
+
 ReactJS
 Redux Toolkit
 React Router DOM
@@ -61,3 +65,9 @@ MEJORAS FUTURAS
 - Agregar más categorías de productos
 - Implementación de registro de usuario en página web
 - Implementación de sistema de pago
+
+
+AUTORES
+Ricardo Arias Salazar
+Luis Fernando Orozco Estrada
+Sergio Reyes Montelongo
