@@ -10,32 +10,24 @@ const initialState = {
   error: null,
 };
 
-// Normaliza respuestas posibles del backend
 function normalizeAuthPayload(payload) {
-  // Caso A: { token, usuario: {...} }
   if (payload?.token && payload?.usuario) {
     return { token: payload.token, user: payload.usuario };
   }
 
-  // Caso B: { token, user: {...} }
   if (payload?.token && payload?.user) {
     return { token: payload.token, user: payload.user };
   }
 
-  // Caso C: { token, ...datosUsuario }
   if (payload?.token && (payload?.email || payload?.nombre || payload?._id)) {
     const { token, ...user } = payload;
     return { token, user };
   }
 
-  // Caso D: { usuario: {...}, token: ... } ya cubierto arriba
-  // Caso E: { user: {...}, token: ... } ya cubierto arriba
-
   return { token: null, user: null };
 }
 
 export const login = createAsyncThunk("auth/login", async (cred) => {
-  // POST /api/usuarios/login
   return apiFetch("/api/usuarios/login", { method: "POST", body: cred });
 });
 
@@ -76,7 +68,6 @@ const slice = createSlice({
 
       const { token, user } = normalizeAuthPayload(a.payload);
 
-      // si no vino algo bien, no rompas
       if (token) s.token = token;
       if (user) s.user = user;
 
@@ -89,22 +80,16 @@ const slice = createSlice({
     });
 
     b.addCase(fetchMe.pending, (s) => {
-      // opcional: si quieres mostrar loading al refrescar sesión
-      // s.status = "loading";
       s.error = null;
     });
 
     b.addCase(fetchMe.fulfilled, (s, a) => {
-      // Aquí tu backend debería regresar el usuario completo con isAdmin
       s.user = a.payload;
       localStorage.setItem(LS_KEY, JSON.stringify({ token: s.token, user: s.user }));
     });
 
     b.addCase(fetchMe.rejected, (s, a) => {
-      // Si falla /yo, normalmente token inválido
       s.error = a.error?.message || "Sesión inválida";
-      // opcional: auto-logout
-      // s.user = null; s.token = null; localStorage.removeItem(LS_KEY);
     });
   },
 });

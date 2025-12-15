@@ -10,7 +10,6 @@ import {
 export default function Cart() {
   const dispatch = useDispatch();
 
-  // si tu slice NO tiene status/error, quítalos (pero normalmente sí)
   const items = useSelector((s) => s.cart.items);
   const status = useSelector((s) => s.cart.status);
   const error = useSelector((s) => s.cart.error);

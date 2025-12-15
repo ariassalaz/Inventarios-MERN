@@ -12,7 +12,6 @@ export const getProducts = createAsyncThunk(
   "products/getProducts",
   async (_, { rejectWithValue }) => {
     try {
-      // público: lista para tienda (no token)
       const data = await apiFetch("/api/productos");
       return Array.isArray(data) ? data : [];
     } catch (e) {

@@ -1,8 +1,7 @@
 const asyncHandler = require("express-async-handler");
-const Producto = require("../modelos/ModeloProducto"); // <- asegúrate que exista
-const Venta = require("../modelos/ModeloVenta"); // <- si no tienes modelo Venta, abajo te dejo alternativa
+const Producto = require("../modelos/ModeloProducto"); 
+const Venta = require("../modelos/ModeloVenta"); 
 
-// POST /api/ventas  (usuario logueado compra)
 const crearVenta = asyncHandler(async (req, res) => {
   const { items } = req.body;
 
@@ -11,7 +10,6 @@ const crearVenta = asyncHandler(async (req, res) => {
     throw new Error("No hay items para comprar");
   }
 
-  // Validar y descontar stock
   for (const it of items) {
     const productoId = it.productoId || it._id;
     const talla = it.talla;
@@ -28,7 +26,6 @@ const crearVenta = asyncHandler(async (req, res) => {
       throw new Error(`Producto no encontrado: ${productoId}`);
     }
 
-    // tu esquema trae tallas: [{talla, stock}]
     const idx = (producto.tallas || []).findIndex((t) => t.talla === talla);
     if (idx === -1) {
       res.status(400);
@@ -47,7 +44,6 @@ const crearVenta = asyncHandler(async (req, res) => {
     await producto.save();
   }
 
-  // Guardar venta (si tienes ModeloVenta)
   let ventaCreada = null;
   try {
     ventaCreada = await Venta.create({
@@ -56,7 +52,6 @@ const crearVenta = asyncHandler(async (req, res) => {
       fecha: new Date(),
     });
   } catch (e) {
-    // Si no tienes ModeloVenta, no pasa nada: el stock ya se descontó
   }
 
   res.status(201).json({

@@ -9,7 +9,7 @@ function norm(str) {
 }
 
 export default function Category() {
-  const { categoria } = useParams(); // /categoria/:categoria
+  const { categoria } = useParams(); 
   const location = useLocation();
   const dispatch = useDispatch();
 
@@ -29,12 +29,10 @@ export default function Category() {
   const filtered = useMemo(() => {
     let list = Array.isArray(items) ? items : [];
 
-    // categoría
     if (categoriaNorm && !["todo", "explorar"].includes(categoriaNorm)) {
       list = list.filter((p) => norm(p.categoria) === categoriaNorm);
     }
 
-    // búsqueda
     if (q) {
       const qn = norm(q);
       list = list.filter((p) => {
